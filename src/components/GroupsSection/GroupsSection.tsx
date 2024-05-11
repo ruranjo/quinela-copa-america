@@ -8,6 +8,8 @@ const GroupsSection: React.FC = () => {
   const setIsSimulate = useStore((state) => state.setIsSimulate);
   const gamesCalendar = useStore((state) => state.gamesCalendar);
   const groupSelected = useStore((state) => state.groupSelected);
+  const updateQualifiedTeams = useStore((state) => state.updateQualifiedTeams);
+  const sortTeamsAndUpdateGroup = useStore((state) => state.sortTeamsAndUpdateGroup);
   const { groups, updateGroup } = useStore(state => ({
     groups: state.groups,
     updateGroup: state.updateGroup
@@ -18,7 +20,7 @@ const GroupsSection: React.FC = () => {
   const [countGame, setCountGame] = useState(0);
   const [scoreLocal, setScoreLocal] = useState(0);
     const [scoreVisite, setScoreVisite] = useState(0);
-    const [teamsUpdated, setTeamsUpdated] = useState(false); // State to track updates
+    //const [teamsUpdated, setTeamsUpdated] = useState(false); // State to track updates
     const actionLocal = (score:number) => setScoreLocal(score);
     const actionVisite = (score:number) => setScoreVisite(score);
 
@@ -58,6 +60,8 @@ const GroupsSection: React.FC = () => {
                 goalFor: team.goalFor + scoreLocal,
                 goalAgainst: team.goalAgainst + scoreVisite,
                 points: scoreLocal > scoreVisite ? team.points + 3 : (scoreLocal === scoreVisite ? team.points + 1 : team.points),
+                randomPoints: team.randomPoints + Math.floor(Math.random() * 10) + 1,
+                
             };
         } else if (team.id === team2Id) {
             return { ...team,
@@ -68,46 +72,16 @@ const GroupsSection: React.FC = () => {
                 goalFor: team.goalFor + scoreVisite,
                 goalAgainst: team.goalAgainst + scoreLocal,
                 points: scoreVisite > scoreLocal ? team.points + 3 : (scoreVisite === scoreLocal ? team.points + 1 : team.points),
+                randomPoints: team.randomPoints + Math.floor(Math.random() * 10) + 1,
             };
         }
         return team;
     });
 
     updateGroup(groupToUpdate.id, { teams: updatedTeams });
-    setTeamsUpdated(true);
+    sortTeamsAndUpdateGroup(groupSelected);
 };
 
-
-
-useEffect(() => {
-
-  const sortTeamsAndUpdateGroup = (groupId: string) => {
-    // Assuming useStore is your global state management hook
-    // Find the group that needs updating
-    const group = groups.find(g => g.group === groupId);
-    console.log(group);
-    if (!group) {
-      console.error('Group not found');
-      return; // Exit if no group found
-    }
-  
-    // Sort teams by points in descending order
-    const sortedTeams = [...group.teams].sort((a, b) => b.points - a.points);
-  
-    // Update the group with the sorted teams
-    updateGroup(group.id, { ...group, teams: sortedTeams });
-  
-    // Optional: Log the new team order
-    console.log('Updated group with sorted teams:', sortedTeams);
-  };
-
-
-  // This assumes there is a state or a way to determine if teams need sorting
-  if (teamsUpdated) { // You need a way to set teamsUpdated after playSystem updates teams
-      sortTeamsAndUpdateGroup(groupSelected);
-      setTeamsUpdated(false);
-  }
-}, [teamsUpdated]); 
 
 const handleGameProgress = () => {
   nextGame();
@@ -115,6 +89,7 @@ const handleGameProgress = () => {
   // Assuming playSystem will eventually lead to `teamsUpdated` being set to true
   setScoreLocal(0);
   setScoreVisite(0);
+  //setTeamsUpdated(true);
   // Don't call sortTeamsAndUpdateGroup directly here
 };
 
@@ -124,49 +99,45 @@ const handleFinishClick = () => {
   playSystem(currentGame.local, currentGame.visitor, scoreLocal, scoreVisite); // Execute game system logic
   setScoreLocal(0); // Reset local score
   setScoreVisite(0); // Reset visitor score
+  //setTeamsUpdated(true);
+  updateQualifiedTeams(groupSelected);
 };
 
   return (
     <>
-      <GroupTable />
-      {currentGame && (
-        <GameSimulate
-          key={countGame} // Force remount of GameSimulate on countGame change
-          teamLocal={currentGame.local}
-          teamVisite={currentGame.visitor}
-          scoreLocal={scoreLocal}
-          scoreVisite={scoreVisite}
-          actionLocal={actionLocal}
-          actionVisite={actionVisite}
+      <div className='border w-[900px] my-8 py-1 rounded-2xl gap-6 border-red-700 flex flex-col items-center bg-primaryblue'>
+        <div className='mt-6'>
+          <GroupTable />
+        </div>
+        {currentGame && (
+          <GameSimulate
+            key={countGame} // Force remount of GameSimulate on countGame change
+            teamLocal={currentGame.local}
+            teamVisite={currentGame.visitor}
+            scoreLocal={scoreLocal}
+            scoreVisite={scoreVisite}
+            actionLocal={actionLocal}
+            actionVisite={actionVisite}
 
-        />
-      )}
-      <div className="flex space-x-2">
-        <button 
-          onClick={() => setIsSimulate()}
-          className="px-4 py-2 bg-gray-300 text-gray-800 font-semibold rounded hover:bg-gray-400 transition duration-200">
-          Volver
-        </button>
-        <button 
-          onClick={() => setIsSimulate()}
-          className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-200">
-          Comenzar
-        </button>
-        {countGame < games.length - 1 ? (
-          <button 
-            onClick={() =>  handleGameProgress()  }
-            className="px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-green-600 transition duration-200">
-            Siguiente
-          </button>
-        ) : (
-          <button 
-            onClick={() =>  handleFinishClick() }
-            className="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition duration-200">
-            Finalizar
-          </button>
+          />
         )}
+        <div className="flex space-x-2">
+          
+          {countGame < games.length - 1 ? (
+            <button 
+              onClick={() =>  handleGameProgress()  }
+              className="px-4 py-2 bg-green-500 text-white font-semibold rounded hover:bg-green-600 transition duration-200">
+              Siguiente
+            </button>
+          ) : (
+            <button 
+              onClick={() =>  handleFinishClick() }
+              className="px-4 py-2 bg-red-500 text-white font-semibold rounded hover:bg-red-600 transition duration-200">
+              Finalizar
+            </button>
+          )}
+        </div>
       </div>
-
     </>
   );
 };

@@ -14,6 +14,7 @@ export interface Team {
     lost: number;
     goalFor: number;
     goalAgainst: number;
+    randomPoints:number;
 }
 
 export interface Qualified {
@@ -33,6 +34,7 @@ export interface Group {
 
 
 export interface Game {
+    id: string;
     local: string;
     visitor: string;
 }

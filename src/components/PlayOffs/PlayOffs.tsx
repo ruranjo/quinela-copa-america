@@ -1,48 +1,88 @@
-import React from 'react'
 
-import { FlagImg,  Team } from '../../interfaces/data.interface';
-import { qflag } from '../../assets/assets';
 import { useStore } from '../../context/store';
-import { GroupTable } from '../GroupTable';
+import { useState } from 'react';
 
-const MenuGroups:React.FC<unknown> = () => {
-    const groups = useStore((state) => state.groups);
-    const setGroupSelected = useStore((state) => state.setGroupSelected);
-    const groupSelected = useStore((state) => state.groupSelected);
-    const setIsSimulate = useStore((state) => state.setIsSimulate);
-    const resetGroupToDefault = useStore((state) => state.resetGroupToDefault);
+interface Game {
+  won: string;
+  local: string;
+  visite: string;
+}
+
+interface Match {
+  id: string;
+  games: Game[];
+}
+
+const PlatOffs = () => {
+  const groups = useStore((state) => state.groups);
+  const initialState = {
+    id:'E4',
+    games:[
+      {
+        won: 'QF',
+        local: groups[0].qualified.first,
+        visite:groups[1].qualified.secondary
+      },
+      {
+        won: 'QF',
+        local: groups[0].qualified.first,
+        visite:groups[1].qualified.secondary
+      },
+      {
+        won: 'QF',
+        local: groups[2].qualified.first,
+        visite:groups[3].qualified.secondary
+      },
+      {
+        won: 'QF',
+        local: groups[3].qualified.first,
+        visite:groups[2].qualified.secondary
+      }
+    ]
+  }
+
+  const [listPlayOff, setListPlayOff] = useState<Match>(initialState);
+
   
-    const handleSelectGroup = (id:string) => {
-        setGroupSelected(id);
-    };
+ const handleE2 = (won1: string,won2: string,won3: string,won4: string)=> {
+  
+  const aux =  {
+    id:'E2',
+    games:[
+      {
+        won: 'QF',
+        local: won1,
+        visite: won2
+      },
+      {
+        won: 'QF',
+        local: won3,
+        visite: won4
+      },
+    ]
+    }
+    setListPlayOff(aux)
 
-    const getFlagImageById = (teams: Team[],teamId: string): FlagImg => {
-        const team = teams.find(team => team.id === teamId);
-        if (team) {
-            return team.flagImg;
-        } else {
-            // Devolver el objeto de imagen predeterminado si no se encuentra el equipo
-            return {
-                sm: qflag,
-                md: qflag,
-            };
+  }
+
+  const handleFinal = (won1: string,won2: string)=> {
+  
+    const aux =  {
+      id:'E2',
+      games:[
+        {
+          won: 'QF',
+          local: won1,
+          visite: won2
         }
-    };
+      ]
+    }
+  
+  setListPlayOff(aux)
+ }
 
-    const allTeamsPlayedThreeMatches = (): boolean => {
-        for (const group of groups) {
-            for (const team of group.teams) {
-                if (team.played !== 3) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    };
-
-    
-  return (
-    <div className='flex w-[900px] my-8 rounded-2xl gap-6 items-center p-6 bg-primaryblue  flex-col'>
+ return (
+    <div>
       <div className='border-[2px] rounded-lg bg-primary '>
       {
         groups.map((group, index)=>{
@@ -72,18 +112,14 @@ const MenuGroups:React.FC<unknown> = () => {
                     </div>
                     <div className='flex gap-4 px-4  items-center '>
                         <button 
-                        onClick={() => handleSelectGroup(group.group)}
+                        onClick={() => {}}
                         className="px-4 py-1 bg-blue-400 text-white font-semibold rounded hover:bg-blue-500 transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
                         Ver
                         </button>
                         {
                             group.teams[0].played > 0 ? 
                             <button 
-                            onClick={() =>{
-                                    if(group.group == groupSelected){
-                                        resetGroupToDefault(groupSelected);
-                                    }
-                                }
+                            onClick={() =>{}
                             }
                             className={`px-4 py-1  text-white font-semibold rounded  transition duration-200 ${group.group == groupSelected ? "bg-red-500 hover:bg-red-600" : "bg-gray-500 cursor-not-allowed"}`} 
                             >
@@ -91,11 +127,7 @@ const MenuGroups:React.FC<unknown> = () => {
                             </button>
                             :
                             <button 
-                                onClick={() => {
-                                    
-                                    setIsSimulate();
-                                    handleSelectGroup(group.group);
-                                }}
+                                onClick={() => {}}
                                 className="px-6 py-1 bg-green-500 text-white font-semibold rounded hover:bg-green-600 transition duration-200 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-opacity-50">
                                 Iniciar
                             </button>
@@ -109,29 +141,11 @@ const MenuGroups:React.FC<unknown> = () => {
         })
       }
       </div>
-    { groupSelected !== '0' ?
-        
-       <GroupTable /> 
-       
-       : 
-       <div className='flex items-center justify-center w-[600px] h-[300px] bg-primary rounded-lg border text-white font-medium'>
-            <h2>SELECIONE UN EQUIPO: 'VER'</h2>
-       </div>
-    } 
-    <button 
-    onClick={() =>{
-            if(allTeamsPlayedThreeMatches()){
-                handleSelectGroup('PLAYOFF');
-            }
-        }
-    }
-    className={`px-4 py-1  text-white font-semibold rounded  transition duration-200 ${allTeamsPlayedThreeMatches() ? "bg-red-500 hover:bg-red-600 cursor-pointer" : "bg-gray-500 cursor-not-allowed"}`} 
-    >
-        Play Offs
-    </button>
-
     </div>
   )
-}
 
-export default MenuGroups
+}
+  
+ 
+
+export default PlatOffs

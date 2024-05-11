@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-color: #202020; /* Fallback para navegadores que no admiten clases de Tailwind personalizadas */
+    background-color: theme('colors.bgMain'); /* Utiliza el color personalizado definido en tailwind.config.js */
+    font-family: "Ubuntu", sans-serif;
+}
+

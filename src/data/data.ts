@@ -1,9 +1,6 @@
 import { flagAr, flagArMd, flagBl, flagBlMd, flagCa, flagCaMd, flagCh, flagChMd, flagCs, flagCsMd, flagEc, flagEcMd, flagJa, flagJaMd, flagMe, flagMeMd, flagPa, flagPaMd, flagPe, flagPeMd, flagPm, flagPmMd, flagUs, flagUsMd, flagUy, flagUyMd, flagVe, flagVeMd } from "../assets/assets";
 import { GameCalendar, Group } from "../interfaces/data.interface";
 
-
-
-
 export const groups: Group[] = [
     {
         id: 1,
@@ -27,6 +24,8 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
+                
             },
             {
                 id: 'PE',
@@ -42,6 +41,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'CH',
@@ -57,6 +57,8 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
+                
             },
             {
                 id: 'CA',
@@ -72,6 +74,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
         ]
     },
@@ -97,6 +100,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'EC',
@@ -112,6 +116,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'VE',
@@ -127,6 +132,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'JA',
@@ -142,6 +148,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
         ]
     },{
@@ -166,6 +173,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'UY',
@@ -181,6 +189,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'PM',
@@ -196,6 +205,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'BL',
@@ -211,6 +221,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
         ]
     },
@@ -236,6 +247,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'CO',
@@ -251,6 +263,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'PA',
@@ -266,6 +279,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
             {
                 id: 'CS',
@@ -281,6 +295,7 @@ export const groups: Group[] = [
                 lost: 0,
                 goalFor: 0,
                 goalAgainst: 0,
+                randomPoints:0
             },
         ]
     }
@@ -292,26 +307,32 @@ export const gamesCalendar: GameCalendar[] = [
         group: 'A',
         dates: [
             {
+                id:"A1",
                 local: 'AR',
                 visitor: 'CA'
             },
             {
+                id:"A2",
                 local: 'PE',
                 visitor: 'CH'
             },
             {
+                id:"A3",
                 local: 'PE',
                 visitor: 'CA'
             },
             {
+                id:"A4",
                 local: 'CH',
                 visitor: 'AR'
             },
             {
+                id:"A5",
                 local: 'AR',
                 visitor: 'PE'
             },
             {
+                id:"A6",
                 local: 'CA',
                 visitor: 'CH'
             },
@@ -322,26 +343,32 @@ export const gamesCalendar: GameCalendar[] = [
         group: 'B',
         dates: [
             {
+                id:"B1",
                 local: 'EC',
                 visitor: 'VE'
             },
             {
+                id:"B2",
                 local: 'ME',
                 visitor: 'JA'
             },
             {
+                id:"B3",
                 local: 'EC',
                 visitor: 'JA'
             },
             {
+                id:"B4",
                 local: 'VE',
                 visitor: 'ME'
             },
             {
+                id:"B5",
                 local: 'ME',
                 visitor: 'EC'
             },
             {
+                id:"B6",
                 local: 'JA',
                 visitor: 'VE'
             },
@@ -352,57 +379,123 @@ export const gamesCalendar: GameCalendar[] = [
         group: 'C',
         dates: [
             {
+                id:"C1",
                 local: 'US',
                 visitor: 'BL'
             },
             {
+                id:"C2",
                 local: 'UY',
                 visitor: 'PM'
             },
             {
+                id:"C3",
                 local: 'PM',
                 visitor: 'US'
             },
             {
+                id:"C4",
                 local: 'UY',
                 visitor: 'BL'
             },
             {
+                id:"C5",
                 local: 'US',
                 visitor: 'UY'
             },
             {
+                id:"C6",
                 local: 'BL',
                 visitor: 'PM'
             },
         ]
-    },{
+    },
+    {
         id: 4,
         group: 'D',
         dates: [
             {
+                id:"D1",
                 local: 'CO',
                 visitor: 'PA'
             },
             {
+                id:"D2",
                 local: 'BR',
                 visitor: 'CS'
             },
             {
+                id:"D3",
                 local: 'CO',
                 visitor: 'CS'
             },
             {
+                id:"D4",
                 local: 'PA',
                 visitor: 'BR'
             },
             {
+                id:"D5",
                 local: 'BR',
                 visitor: 'CO'
             },
             {
+                id:"D6",
                 local: 'CS',
                 visitor: 'PA'
+            },
+        ]
+    },
+    {
+        id: 5,
+        group: 'E4',
+        dates: [
+            {
+                id:"E41",
+                local: 'A1',
+                visitor: 'B2'
+            },
+            {
+                id:"E42",
+                local: 'B1',
+                visitor: 'A2'
+            },
+            {
+                id:"E43",
+                local: 'C1',
+                visitor: 'D2'
+            },
+            {
+                id:"E44",
+                local: 'D1',
+                visitor: 'C2'
+            }
+        ]
+    },
+    {
+        id: 6,
+        group: 'E2',
+        dates: [
+            {
+                id:"E21",
+                local: 'E41',
+                visitor: 'E42'
+            },
+            {
+                id:"E22",
+                local: 'E43',
+                visitor: 'E44'
+            } 
+        ]
+    },
+    {
+        id: 7,
+        group: 'E1',
+        dates: [
+            {
+                id:"E11",
+                local: 'E21',
+                visitor: 'E22'
             },
         ]
     }
