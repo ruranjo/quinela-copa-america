@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/uuid": "^9.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "uuid": "^9.0.1",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

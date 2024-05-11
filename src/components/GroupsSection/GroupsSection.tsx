@@ -18,7 +18,7 @@ const GroupsSection: React.FC = () => {
 
   const [games, setGames] = useState<Game[]>([]);
   const [countGame, setCountGame] = useState(0);
-  const [scoreLocal, setScoreLocal] = useState(0);
+    const [scoreLocal, setScoreLocal] = useState(0);
     const [scoreVisite, setScoreVisite] = useState(0);
     //const [teamsUpdated, setTeamsUpdated] = useState(false); // State to track updates
     const actionLocal = (score:number) => setScoreLocal(score);
@@ -105,7 +105,10 @@ const handleFinishClick = () => {
 
   return (
     <>
-      <div className='border w-[900px] my-8 py-1 rounded-2xl gap-6 border-red-700 flex flex-col items-center bg-primaryblue'>
+      <div className=' w-[900px] my-8 py-1 rounded-2xl gap-6 flex flex-col items-center bg-primaryblue'>
+        <div className='h-[10px] w-full  '>
+          <h1 className='text-center text-white font-semibold text-xl'>FASE DE GRUPOS</h1>
+        </div>
         <div className='mt-6'>
           <GroupTable />
         </div>
@@ -118,7 +121,6 @@ const handleFinishClick = () => {
             scoreVisite={scoreVisite}
             actionLocal={actionLocal}
             actionVisite={actionVisite}
-
           />
         )}
         <div className="flex space-x-2">

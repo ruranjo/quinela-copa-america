@@ -5,6 +5,7 @@ import { qflag } from '../../assets/assets';
 import { useStore } from '../../context/store';
 import { GroupTable } from '../GroupTable';
 
+
 const MenuGroups:React.FC<unknown> = () => {
     const groups = useStore((state) => state.groups);
     const setGroupSelected = useStore((state) => state.setGroupSelected);
@@ -42,7 +43,10 @@ const MenuGroups:React.FC<unknown> = () => {
 
     
   return (
-    <div className='flex w-[900px] my-8 rounded-2xl gap-6 items-center p-6 bg-primaryblue  flex-col'>
+    <div className='flex w-[900px] my-7 rounded-2xl gap-6 items-center p-6 bg-primaryblue  flex-col'>
+        <div className='h-[10px] w-full  '>
+        <h1 className='text-center text-white font-semibold text-xl'>FASE DE GRUPOS</h1>
+        </div>
       <div className='border-[2px] rounded-lg bg-primary '>
       {
         groups.map((group, index)=>{

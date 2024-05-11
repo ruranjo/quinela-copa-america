@@ -58,7 +58,7 @@ const GameSimulate:React.FC<Props> = ({teamLocal, teamVisite, actionLocal, actio
         }
         return {} as Team; // Retorna undefined si no se encuentra el equipo
     };
-
+    
     const [team1] = useState(getTeamById(teamLocal))
     const [team2] = useState(getTeamById(teamVisite))
     
